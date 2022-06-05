@@ -1,0 +1,19 @@
+{
+  "type": "application",
+  "name": "Workbook",
+  "singleton": true,
+  "hidden": false,
+  "category": null,
+  "server": "server.js",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "Workbook"
+  },
+  "description": {
+    "en_EN": "Workbook"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

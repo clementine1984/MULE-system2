@@ -1,0 +1,33 @@
+{
+  "name": "lass",
+  "version": "1.0.0",
+  "description": "Learning Analytics Storage Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.9.4",
+    "class-transformer": "^0.1.9",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "express-session": "^1.15.4",
+    "cookie-parser": "^1.4.3",
+    "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.3.0",
+    "reflect-metadata": "^0.1.12",
+    "rethinkdb-websocket-client": "^0.5.1",
+    "rethinkdb-websocket-server": "^0.6.0",
+    "thinkagain": "^0.1.6",
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.9.2",
+    "typescript-json-schema": "^0.31.0"
+  },
+  "devDependencies": {
+    "webpack": "^4.16.1",
+    "webpack-cli": "^3.1.0"
+  }
+}

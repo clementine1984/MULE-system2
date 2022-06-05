@@ -1,0 +1,17 @@
+{
+  "type": "application",
+  "name": "About-MULE",
+  "category": null,
+  "server": "server.js",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "About MULE"
+  },
+  "description": {
+    "en_EN": "About MULE"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

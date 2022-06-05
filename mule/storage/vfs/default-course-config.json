@@ -1,0 +1,11 @@
+{
+	"login": {
+		"eval": "hasrole('lecturer')"
+	},
+	"whitelist":  { "eval": "( hasrole('lecturer') ? ['*'] : ['StandardTheme','Consent','Calculator','GnomeIcons','FreedesktopSounds'] )" },//asterisk is a wildcard - allows all applications - just add "*" to the list
+	"apps": {
+		"workbook": {
+			"admin": {"eval": "( hasrole('lecturer'))"}
+		}
+	}
+}

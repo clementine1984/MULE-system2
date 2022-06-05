@@ -1,0 +1,130 @@
+# Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mule
+  namespace: mule
+spec:
+  selector:
+    app: mule
+  type: LoadBalancer
+  ports:
+    - name: entry-point
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+
+# Deployment
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mule
+  namespace: mule
+spec:
+  serviceName: "mule"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mule
+  template:
+    metadata:
+      labels:
+        app: mule
+    spec:
+      serviceAccountName: mule
+      imagePullSecrets:
+        - name: container-registry-secret
+      volumes:
+        - name: mule-pv-storage
+          persistentVolumeClaim:
+            claimName: mule-pvc
+      containers:
+        - name: mule
+          image: yosypmykhailiv/mule
+          imagePullPolicy: Always
+          env:
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: osjs_secret
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: jwt_secret
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: jwt_key
+            - name: LTI_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: lti_secret
+            - name: LTI_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: lti_key
+            - name: CEE_BASE_URL
+              value: "http://a0f083650c4b3419f8015615a2fc65e3-1248311558.eu-west-1.elb.amazonaws.com/"
+            - name: CEE_BASE_WS
+              value: "ws://a0f083650c4b3419f8015615a2fc65e3-1248311558.eu-west-1.elb.amazonaws.com/"
+            - name: CEE_TYPE
+              value: "cee"
+            - name: CEE_DATA_FORMAT
+              value: "json"
+            - name: CEE_MAX_MEMORY
+              value: "67108864"
+            - name: CEE_LANGUAGES
+              value: "java:JAVA,php:PHP"
+            - name: CEE_RUNNERS
+              value: "JAVA:java8,PHP:php7.1"
+            - name: NODE_TLS_REJECT_UNAUTHORIZED
+              value: "0"
+            - name: SECURE_COOKIES
+              value: "true"
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "200m"
+          volumeMounts:
+            - mountPath: "/home/node/app/storage/vfs"
+              name: mule-pv-storage
+
+# HPA
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mule
+  namespace: mule
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: mule
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

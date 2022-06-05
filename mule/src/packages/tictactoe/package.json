@@ -1,0 +1,51 @@
+{
+  "name": "tictactoe",
+  "scripts": {
+    "test": "npm run eslint && npm run stylelint",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "eslint": "eslint index.js server.js",
+    "stylelint": "stylelint index.scss",
+    "prepublishOnly": "npm run test && rm ./dist/* && npm run build"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-react": "^7.16.7",
+    "@osjs/dev-meta": "^2.1.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module"
+    },
+    "extends": "@osjs/eslint-config"
+  },
+  "stylelint": {
+    "extends": "@osjs/stylelint-config"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react",
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ]
+  },
+  "osjs": {
+    "type": "package"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/material": "^5.0.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "socket.io-client": "^4.4.1"
+  }
+}

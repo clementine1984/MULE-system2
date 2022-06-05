@@ -1,0 +1,19 @@
+{
+  "type": "application",
+  "name": "Consent",
+  "singleton": true,
+  "hidden": false,
+  "category": null,
+  "server": "server.js",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "Consent"
+  },
+  "description": {
+    "en_EN": "Consent"
+  },
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

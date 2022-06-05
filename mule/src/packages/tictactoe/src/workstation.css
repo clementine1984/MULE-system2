@@ -1,0 +1,15 @@
+.workstation {
+  display: flex;
+  align-items: flex-start;
+  justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.workstation > * {
+  margin: 0 auto;
+  flex-basis: 50%;
+  width: 100%;
+  height: 100%;
+}

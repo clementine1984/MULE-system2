@@ -1,0 +1,24 @@
+{
+  "name": "lass",
+  "version": "1.0.0",
+  "description": "Learning Analytics Storage Server",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/natalie.culligan/LASS.git"
+  },
+  "author": "Natalie Culligan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/natalie.culligan/LASS/issues"
+  },
+  "homepage": "https://gitlab.com/natalie.culligan/LASS#README"
+}

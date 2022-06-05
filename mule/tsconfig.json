@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es6",
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "./src/server/**/*",
+    "./src/client/**/*"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "name": "@osjs/workbook",
+  "version": "1.1.10",
+  "description": "Workbook app",
+  "watch": {
+    "build-server": {
+      "patterns": [
+        "server.ts",
+        "../editor/WebSocketWrapper.ts"
+      ],
+      "verbose": false
+    }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "eslint": "eslint *.js",
+    "build": "webpack && tsc server.ts",
+    "build-server": "tsc server.ts",
+    "watch": "webpack --watch",
+    "watch-all": "webpack --watch &  npm-watch build-server",
+    "watch-server": "npm-watch build-server",
+    "stylelint": "stylelint index.scss src/**/*.scss",
+    "prepublishOnly": "npm run eslint && npm run stylelint && rm ./dist/* && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/os-js/osjs-example-react-application.git"
+  },
+  "keywords": [
+    "osjs"
+  ],
+  "files": [
+    "dist/",
+    "server.js",
+    "metadata.json"
+  ],
+  "dependencies": {
+    "@date-io/date-fns": "^1.3.11",
+    "@material-ui/core": "^4.9.1",
+    "@material-ui/icons": "^4.2.1",
+    "@material-ui/pickers": "^3.2.6",
+    "@types/redux-logger": "^3.0.7",
+    "copy-webpack-plugin": "^5.0.4",
+    "date-fns": "^2.0.0-beta.5",
+    "image-webpack-loader": "^5.0.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "material-ui-pickers": "^2.2.4",
+    "moment": "^2.22.2",
+    "npm-watch": "^0.6.0",
+    "react-autocomplete": "^1.8.1",
+    "react-desktop-menus": "^1.0.6",
+    "react-frame-component": "^4.0.2",
+    "react-monaco-editor": "^0.26.2",
+    "react-numeric-input": "^2.2.3",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
+    "@osjs/eslint-config": "^1.0.0",
+    "@types/webgl2": "0.0.5",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.16.0",
+    "file-loader": "^4.0.0",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "redux-devtools": "^3.5.0",
+    "redux-devtools-dock-monitor": "^1.1.3",
+    "redux-devtools-log-monitor": "^1.4.0",
+    "sass-loader": "^7.1.0",
+    "stylelint": "^9.10.1",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.5.1",
+    "url-loader": "^2.0.0",
+    "ts-loader": "^6.0.3",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  },
+  "author": "Anders Evenrud <andersevenrud@gmail.com>",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/os-js/osjs-example-react-application/issues"
+  },
+  "homepage": "https://github.com/os-js/osjs-example-react-application#readme",
+  "osjs": {
+    "type": "package"
+  },
+  "resolutions": {
+    "@types/webgl2": "0.0.5"
+  }
+}

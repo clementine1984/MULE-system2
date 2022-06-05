@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple LTI Launch Test</title>
+    <script src="bundle.js"></script>
+</head>
+
+<body>
+
+
+    <textarea id="data" rows="15" cols="100">
+{
+  targetURL: "http://localhost/login", //LTI Provider URL
+  secret: "my_super_secret",                   //Put your LTI secret here
+  //===================================================================
+  // LTI post data
+  //===================================================================
+  oauth_consumer_key: "my_super_secret",   //Put your LTI key here
+  user_id: "0000",                 //Put your user_id here eg 0000
+  context_id: "0000",              //Put your course id here eg 0000
+  lis_person_contact_email_primary: "Test.User@mu.ie",  //User email address here
+  context_title: "Test Course Space (2020-21)",         //Course title here
+  roles: "Lecturer",                                    //Role here (e.g. Lecturer)
+  tool_consumer_instance_guid: "2020.localhost",        //Instance guid
+  lis_person_name_full: "Test User"                     //User full name
+}
+    </textarea><br/>
+    <button id="testbutton">Build Login Request</button>
+    <hr/>
+    <h2>Login Request Data:</h2>
+    <pre><code class="language-json">Request data will appear here</code></pre>
+    <hr/>
+    <form id="ltiForm"></form>
+    <button type="submit" form="ltiForm">Login with LTI</button>
+
+
+    <script>
+    //Thanks to: https://medium.com/lcom-techblog/simple-lti-tool-consumer-in-html-and-javascript-72ca153d7a83
+        var stored=localStorage.getItem('login-data');
+
+        if(stored)
+        {
+          document.getElementById("data").innerHTML=stored;
+        }
+
+
+
+        document.getElementById("data").onchange=function()
+        {
+          localStorage.setItem('login-data',document.getElementById("data").value);
+        }
+
+
+
+
+        document.getElementById("testbutton").onclick=function()
+        {
+          var data=eval("("+document.getElementById("data").value+")");
+          //take out the secret
+          var secret=data["secret"];
+          delete data["secret"];
+
+          var target=data["targetURL"];
+          delete data["targetURL"];
+
+
+
+
+	
+
+
+
+          var oauth = require('oauth-sign');
+          var action = target;
+          var method = 'POST';
+          var timestamp = Math.round(Date.now() / 1000);
+
+          var params = {
+              // LTI Required Parameters
+              lti_message_type: 'basic-lti-launch-request',
+              lti_version: 'LTI-1p0',
+              resource_link_id: 'resourceLinkId',
+              // OAuth 1.0a Required Parameters
+              oauth_nonce: btoa(timestamp),
+              oauth_signature_method: 'HMAC-SHA1',
+              oauth_timestamp: timestamp,
+              oauth_version: '1.0',
+
+  	          user_id: "0000",
+  	          lis_person_contact_email_primary: "Test.User@mu.ie",
+  	          context_id: "0000",
+  	          context_title: "Test Course Space (2018-19)",
+  	          roles: "Instructor",
+  	          tool_consumer_instance_guid: "2019.localhost", //"2019.moodle.maynoothuniversity.ie",
+  	          lis_person_name_full: "Test User"
+          };
+
+
+          //replace the params with that from data
+          for(var name in data)
+          {
+             params[name]=data[name]
+          }
+
+          var signature = oauth.hmacsign(method, action, params, secret);
+          params.oauth_signature = signature;
+
+          var form = document.querySelector("#ltiForm");
+          form.action = action;
+          form.method = method;
+
+
+
+
+          for (var name in params) {
+              var node = document.createElement("input");
+              node.name = name;
+              node.type = 'hidden';
+              node.value = params[name];
+              form.appendChild(node);
+          }
+
+          var output = document.querySelector("code");
+          output.textContent = JSON.stringify(params, null, 2);
+
+          console.log(form);
+
+          var meta = document.querySelector("body > script");
+          console.log(meta);
+
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>

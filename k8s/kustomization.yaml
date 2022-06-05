@@ -1,0 +1,14 @@
+resources:
+# Basics
+  - namespace.yaml
+  - service-account.yaml
+  - secrets.yaml
+# Storage
+  - storage/local/rethinkdb-pv.yaml
+  - storage/local/rethinkdb-pvc.yaml
+  - storage/local/mule-pv.yaml
+  - storage/local/mule-pvc.yaml
+# Apps
+  - apps/rethinkdb.yaml
+  - apps/lass.yaml
+  - apps/mule.yaml

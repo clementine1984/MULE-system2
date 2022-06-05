@@ -1,0 +1,21 @@
+{
+  "type": "application",
+  "name": "tictactoe",
+  "category": null,
+  "server": "server.js",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "tictactoe"
+  },
+  "description": {
+    "en_EN": "tictactoe"
+  },
+  "mimes": [
+    "^image\/(.*)",
+    "^video\/(.*)"
+  ],
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

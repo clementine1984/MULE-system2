@@ -1,0 +1,14 @@
+//this is a sample config file - copy it to config.json on the course drive
+//note that comments in a JSON file are non-standard (so  syntax highlighting is a bit weird in your chosen editor, no doubt)
+//you can see the context object printed on the console log as you login
+{
+	"login": {
+		"eval": "hasrole('lecturer')" //only allow lecturers in - change this to true to allow all authenticated users in
+	},
+	"whitelist":  { "eval": "( hasrole('lecturer') ? ['*'] : ['StandardTheme','Consent','Calculator','GnomeIcons','FreedesktopSounds'] )" },//asterisk is a wildcard - allows all applications - just add "*" to the list
+	"apps": {
+		"workbook": {
+			"admin": {"eval": "( hasrole('lecturer'))"}
+		}
+	}
+}

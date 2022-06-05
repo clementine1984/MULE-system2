@@ -1,0 +1,85 @@
+# Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lass
+  namespace: mule
+spec:
+  selector:
+    app: lass
+  ports:
+    - name: entry-point
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+# Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lass
+  namespace: mule
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lass
+  template:
+    metadata:
+      labels:
+        app: lass
+    spec:
+      serviceAccountName: mule
+      containers:
+        - name: lass
+          image: yosypmykhailiv/lass
+          env:
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: osjs_secret
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: mule-secrets
+                  key: jwt_secret
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+
+# HPA
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: lass
+  namespace: mule
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: lass
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70

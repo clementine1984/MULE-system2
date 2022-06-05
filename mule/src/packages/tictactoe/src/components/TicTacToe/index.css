@@ -1,0 +1,22 @@
+.tictoctoe {
+  /* flex-grow: 1; */
+  box-sizing: border-box;
+  padding: 10px 0;
+  /* width: 100%;
+  height: 100%; */
+  display: flex;
+  flex-direction: column;
+}
+
+.tictoctoe > div {
+  /* margin-bottom: 10px; */
+  text-align: center;
+}
+
+/* .game-tips {
+  color: brown;
+} */
+
+.algorithm-error {
+  color: tomato;
+}

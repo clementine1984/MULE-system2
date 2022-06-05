@@ -1,0 +1,61 @@
+version: '3'
+services:
+
+  rethinkdb:
+    image: rethinkdb:2.4
+    container_name: rethinkdb
+    restart: always
+    volumes:
+     - ./docker/rethinkdb/data:/data
+
+  lass:
+    build:
+      context: ./
+      dockerfile: docker/lass/Dockerfile
+      args:
+        NODE_ENV: development
+    image: yosypmykhailiv/lass
+    container_name: lass
+    restart: always
+    ports: 
+      - "81:8080"
+#    volumes:
+#     - ./lass:/home/node/app
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - SECRET=${OSJS_SECRET}
+
+  mule:
+    build:
+      context: ./
+      dockerfile: docker/mule/Dockerfile
+      args:
+        NODE_ENV: development
+    command: npm run dev
+    image: yosypmykhailiv/mule
+    container_name: mule
+    restart: always
+    ports:
+      - "80:8080"
+    volumes:
+     - ./mule:/home/node/app
+     - /home/node/app/node_modules
+     - /home/node/app/dist
+     - /home/node/app/src/packages
+#     - /home/node/app/src/packages/about/node_modules
+#     - /home/node/app/src/packages/about/dist
+    user: "${CONTAINER_UID}:${CONTAINER_GID}"
+    environment:
+      JWT_SECRET: ${JWT_SECRET}
+      SECRET: ${OSJS_SECRET}
+      JWT_KEY: ${JWT_KEY}
+      LTI_SECRET: ${LTI_SECRET}
+      LTI_KEY: ${LTI_KEY}
+      CEE_BASE_URL: ${CEE_BASE_URL}
+      CEE_BASE_WS: ${CEE_BASE_WS}
+      CEE_TYPE: ${CEE_TYPE}
+      CEE_DATA_FORMAT: ${CEE_DATA_FORMAT}
+      CEE_MAX_MEMORY: ${CEE_MAX_MEMORY}
+      CEE_RUNNERS: ${CEE_RUNNERS}
+      NODE_TLS_REJECT_UNAUTHORIZED: ${NODE_TLS_REJECT_UNAUTHORIZED}
+      SECURE_COOKIES: ${SECURE_COOKIES}

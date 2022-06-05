@@ -1,0 +1,59 @@
+# Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rethinkdb
+  namespace: mule
+spec:
+  selector:
+    app: rethinkdb
+  ports:
+    - name: internal
+      protocol: TCP
+      port: 28015
+      targetPort: 28015
+    - name: ui
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+
+# Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rethinkdb
+  namespace: mule
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rethinkdb
+  template:
+    metadata:
+      labels:
+        app: rethinkdb
+    spec:
+      serviceAccountName: mule
+      volumes:
+          - name: rethinkdb-pv-storage
+            persistentVolumeClaim:
+              claimName: rethinkdb-pvc
+      containers:
+        - name: rethinkdb
+          image: rethinkdb:2.4
+          ports:
+            - containerPort: 28015
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          volumeMounts:
+            - mountPath: "/data"
+              name: rethinkdb-pv-storage
+

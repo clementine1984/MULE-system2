@@ -1,0 +1,38 @@
+{
+  "type": "application",
+  "name": "editor",
+  "category": null,
+  "server": "server.js",
+  "icon": "icon.png",
+  "title": {
+    "en_EN": "Editor"
+  },
+  "description": {
+    "en_EN": "Editor"
+  },
+  "mimes": [
+    "^image\/(.*)",
+    "^text\/(.*)",
+    "application\/json",
+    "application\/java",
+    "application\/javascript",
+    "application\/postscript",
+    "application\/ecmascript",
+    "application\/x-httpd-php-source",
+    "application\/x-httpd-php",
+    "application\/x-php",
+    "application\/x-lua",
+    "application\/x-python",
+    "application\/x-python-code",
+    "application\/x-python-code",
+    "application\/x-java-class",
+    "application\/x-javascript",
+    "application\/x-lisp",
+    "application\/x-bsh",
+    "application\/x-sh"
+  ],
+  "files": [
+    "main.js",
+    "main.css"
+  ]
+}

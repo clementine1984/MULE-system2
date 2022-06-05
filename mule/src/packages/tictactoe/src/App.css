@@ -1,0 +1,17 @@
+body {
+  font: "Century Gothic", Futura, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+#root {
+  /* min-width: 1440px; */
+  overflow-x: auto;
+}
