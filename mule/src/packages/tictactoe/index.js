@@ -15,7 +15,7 @@ const register = (core, args, options, metadata) => {
   proc.createWindow({
     id: 'ExampleReactApplicationWindow',
     title: metadata.title.en_EN,
-    dimension: {width: 800, height: 800},
+    dimension: {width: 50, height: 800},
     position: {left: 500, top: 50}
   })
     .on('destroy', () => proc.destroy())
