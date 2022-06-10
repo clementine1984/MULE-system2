@@ -15,8 +15,8 @@ const register = (core, args, options, metadata) => {
   proc.createWindow({
     id: 'ExampleReactApplicationWindow',
     title: metadata.title.en_EN,
-    dimension: {width: 50, height: 800},
-    position: {left: 500, top: 50}
+    dimension: {width: 400, height: 400},
+    position: {left: 50, top: 50}
   })
     .on('destroy', () => proc.destroy())
     .render(($content, win) => ReactDOM.render(React.createElement(App, { core, proc, win }), $content));

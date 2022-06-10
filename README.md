@@ -69,7 +69,7 @@ For this purpose, just add the following two lines for each app to the `volumes`
  - `/home/node/app/src/packages/{APP_NAME}/dist`
 
 where `APP_NAME` is the name of the app folder (e.g. `editor`, `terminal`, etc).
-To apply the changes made to `docker-compose.yaml` file, run `docker-compose down` and then `docker-compose up -d`.
+To apply the changes made to `docker-compose.yaml` file, run `docker-compose down` and then `docker-compose up -d`. 
 
 ### Container registry
 After you made some changes to the source code and you are satisfied with the result you will commit the changes and push them to the git repository.

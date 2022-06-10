@@ -1,0 +1,53 @@
+{
+  "type": "application",
+
+  
+  "name": "new-app",
+
+  
+  "category": "other",
+
+
+  "autostart": false,
+
+  
+  "singleton": false,
+
+  
+  "hidden": false,
+
+  
+  "icon": "icon.png",
+
+  
+  "server": "server.js",
+
+  
+  "groups": [],
+
+  
+  "strictGroups": true,
+
+
+  "title": {
+    "en_EN": "My Application"
+  },
+
+
+  "description": {
+    "en_EN": "My Application"
+  },
+
+  
+  "mimes": [
+    "^image\/(.*)",
+    "^video\/(.*)"
+  ],
+
+  
+  "files": [
+    
+    "main.js",
+    "main.css"
+  ]
+}

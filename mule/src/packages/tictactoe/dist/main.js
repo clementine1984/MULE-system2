@@ -124,11 +124,11 @@ var register = function register(core, args, options, metadata) {
     id: 'ExampleReactApplicationWindow',
     title: metadata.title.en_EN,
     dimension: {
-      width: 800,
-      height: 800
+      width: 400,
+      height: 400
     },
     position: {
-      left: 500,
+      left: 50,
       top: 50
     }
   }).on('destroy', function () {
